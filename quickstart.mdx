@@ -150,7 +150,6 @@ const trace = CodeThread.trace({ name: "RAG Procedure" });
 
 const span = trace.span({
   name: "Get top docs for user",
-  traceId: trace.id,
 });
 
 const user = await User(id);
@@ -169,6 +168,9 @@ span.close();
 const generation = await openAi.chat.completions.create({
   config,
   messages: prompt(user, docs),
+  codeThreadMeta: {
+    traceId: trace.id,
+  },
 });
 
 trace.close();
