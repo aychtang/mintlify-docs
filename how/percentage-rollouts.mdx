@@ -1,0 +1,22 @@
+---
+title: "Percentage rollouts"
+description: "How we release new features incrementally to your users"
+icon: "percent"
+---
+
+## Why use percentage rollouts
+
+Using our percentage rollout functionality, you can gradually roll out new model or prompt configurations to a percentage of your users, allowing you to A/B test new model and prompt variations.
+
+All prediction data stored via Monitor will be labelled with the model and prompt variation it belongs to, which lets you evaluate each configuration in production safely before rolling it out to your entire user base.
+
+## How it works
+
+- Generate a hash based on the user + prompt data
+- Generate a percentage value based on the hash
+- Compare the percentage value to the percentage rollout value of your prompt / model configuration
+- Assign the flag variation to the user based on whether their percentage value is less than or equal to the percentage rollout value
+
+This means that if you set the rollout percentage to 100, all users will see the new variation, and if you set the rollout percentage to 50, only values up to 50% of the bucket size will see the new variation.
+
+Since the hash is generated based on the user data and is uniformly distributed, the percentage rollout is also uniformly distributed and the same percentage rollout value will result in the same set of users seeing the new variation.

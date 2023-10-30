@@ -1,86 +1,175 @@
 ---
-title: 'Quickstart'
-description: 'Start building awesome documentation in under 5 minutes'
+title: "JS/TS Quickstart - Monitor"
+description: "Start safely deploying and monitoring your LLM app features with procedural rollouts"
 ---
 
-## Setup your development
+## Get started in 1 minute
 
-Learn how to update your docs locally and and deploy them to the public.
+<Steps titleSize="h2">
+  <Step title="Drop in OpenAI SDK installation">
+    Get started in 1 minute with our drop-in SDK installation for your app.
 
-### Edit and preview
+    ```ts
+    import OpenAI from "codethread/OpenAI";
 
-<AccordionGroup>
-  <Accordion icon="github" title="Clone your docs locally">
-    During the onboarding process, we created a repository on your Github with
-    your docs content. You can find this repository on our
-    [dashboard](https://dashboard.mintlify.com). To clone the repository
-    locally, follow these
-    [instructions](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
-    in your terminal.
-  </Accordion>
-  <Accordion icon="rectangle-terminal" title="Preview changes">
-    Previewing helps you make sure your changes look as intended. We built a
-    command line interface to render these changes locally. 1. Install the
-    [Mintlify CLI](https://www.npmjs.com/package/mintlify) to preview the
-    documentation changes locally with this command: ``` npm i -g mintlify ```
-    2. Run the following command at the root of your documentation (where
-    `mint.json` is): ``` mintlify dev ```
-  </Accordion>
-</AccordionGroup>
+    const openAi = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+      codeThreadApiKey: process.env.CODETHREAD_API_KEY,
+    });
 
-### Deploy your changes
+    const generation = await openAi.chat.completions.create({
+      config,
+      messages,
+    });
+    ```
 
-<AccordionGroup>
+  </Step>
+  <Step title="Add additional metadata">
+    Add the information you need to your LLM API calls that to help understand your users and how they are using your app.
 
-<Accordion icon="message-bot" title="Install our Github app">
-  Our Github app automatically deploys your changes to your docs site, so you
-  don't need to manage deployments yourself. You can find the link to install on
-  your [dashboard](https://dashboard.mintlify.com). Once the bot has been
-  successfully installed, there should be a check mark next to the commit hash
-  of the repo.
-</Accordion>
-<Accordion icon="rocket" title="Push your changes">
-  [Commit and push your changes to
-  Git](https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository#about-git-push)
-  for your changes to update in your docs site. If you push and don't see that
-  the Github app successfully deployed your changes, you can also manually
-  update your docs through our [dashboard](https://dashboard.mintlify.com).
-</Accordion>
+        ```ts
+        import OpenAI from "codethread/OpenAI";
+        import User from "@/domain/users";
 
-</AccordionGroup>
+        const openAi = new OpenAI({
+          apiKey: process.env.OPENAI_API_KEY,
+          codeThreadApiKey: process.env.CODETHREAD_API_KEY,
+        });
 
-## Update your docs
+        const user = await new User(id);
 
-Add content directly in your files with MDX syntax and React components. You can use any of our components, or even build your own.
+        const generation = await openAi.chat.completions.create({
+          config,
+          messages,
+          properties: {
+            _userId: user.id,
+            _parentId: user.teamId,
+            location: 'app/routes/location'
+          }
+        });
+        ```
+        <Tip>You can add whatever custom fields you need, but there are a set of indexed properties which are prefixed by an underscore.</Tip>
 
-<CardGroup>
+  </Step>
+  <Step title="Get visibility of your data in the dashboard">
+    See your data in the LLM dashboard and get insights into how your users are interacting with your app. We provide dashboards, graphs, monitors, and alerts on the following:
+    - **User activity** - understand usage and user satisfaction through prediction logging, user feedback collection, and automated eval tools.
+    - **Costs** - visualize and monitor your LLM costs, we provide graphs which help you understand the distribution of token usage and costs for each of your prompts.
+    - **Performance** - see the latency and throughput of your LLM calls.
+    - **Quality** - monitor and visualize the quality of your model, we provide graphs which show latency and throughput for each prompt that is running within your application.
 
-<Card title="Style Your Docs" icon="paintbrush" href="/settings/global">
-  Add flair to your docs with personalized branding.
-</Card>
+  </Step>
+</Steps>
 
-<Card
-  title="Add API Endpoints"
-  icon="square-code"
-  href="/api-playground/configuration"
->
-  Implement your OpenAPI spec and enable API user interaction.
-</Card>
+## Start using managed prompts
 
-<Card
-  title="Integrate Analytics"
-  icon="chart-mixed"
-  href="/analytics/supported-integrations"
->
-  Draw insights from user interactions with your documentation.
-</Card>
+Use managed prompts to get full version control and history of your prompts, making it easier to configure prompt and model settings. Here’s how you can start integrating managed prompts into your application:
 
-<Card
-  title="Host on a Custom Domain"
-  icon="browser"
-  href="/settings/custom-domain/subdomain"
->
-  Keep your docs on your own website's subdomain.
-</Card>
+```ts
+import OpenAI from "codethread/OpenAI";
+import User from "@/domain/users";
 
-</CardGroup>
+const openAi = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+  codeThreadApiKey: process.env.CODETHREAD_API_KEY,
+});
+
+const user = await new User(id);
+
+const generation = await openAi.chat.completions.create({
+  // Config and prompt defined in your code can be used as a
+  // fallback during service unavailability:
+  config,
+  messages,
+  properties: {
+    _userId: user.id,
+    _parentId: user.teamId,
+    location: 'app/routes/location'
+  }
+  codeThreadMeta: {
+    promptName: "My Prompt Name in CodeThread Cloud",
+    promptInputs: {
+      user_id: user.id,
+    },
+  },
+});
+```
+
+## Set up procedural rollouts of new model and prompt configurations
+
+Once you are using managed prompts, you can set up a rollout of new model and prompt configurations.
+
+<Tip>
+  Learn more about how our percentage rollouts work{" "}
+  <a href="/how/percentage-rollouts">here</a>.
+</Tip>
+
+## Collect user feedback for your app's generations
+
+Collect user feedback for your app's generations with our feedback collection API.
+
+```ts
+import CodeThread from "codethread";
+import OpenAI from "codethread/OpenAI";
+
+const openAi = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+  codeThreadApiKey: process.env.CODETHREAD_API_KEY,
+});
+
+const generation = await openAi.chat.completions.create({
+  config,
+  messages,
+});
+
+// Send user feedback for a generation:
+await CodeThread.feedback.post({
+  id: generation.codeThreadId,
+  feedback: {
+    value: 0,
+    message: "Did not understand the example..",
+  },
+});
+```
+
+## Add custom tracing to your app
+
+Set up tracing to help you understand more complex interactions within your app like RAG enabled features, prompt chains, and more.
+
+```ts
+import CodeThread from "codethread";
+import OpenAI from "codethread/OpenAI";
+import User from "@/domain/users";
+
+const openAi = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+  codeThreadApiKey: process.env.CODETHREAD_API_KEY,
+});
+
+const trace = CodeThread.trace({ name: "RAG Procedure" });
+
+const span = trace.span({
+  name: "Get top docs for user",
+  traceId: trace.id,
+});
+
+const user = await User(id);
+span.event({
+  name: "User fetched",
+  properties: { user: user.toJSON() },
+});
+
+const docs = await User.getTopDocs(user.id);
+span.event({
+  name: "Documents fetched",
+  properties: { docs },
+});
+span.close();
+
+const generation = await openAi.chat.completions.create({
+  config,
+  messages: prompt(user, docs),
+});
+
+trace.close();
+```

@@ -1,71 +1,45 @@
 ---
 title: Introduction
-description: 'Welcome to the home of your new documentation'
+description: "See, manage, and control your LLM features with LLM-Q Monitor"
 ---
 
-<img
-  className="block dark:hidden"
-  src="/images/hero-light.svg"
-  alt="Hero Light"
-/>
-<img
-  className="hidden dark:block"
-  src="/images/hero-dark.svg"
-  alt="Hero Dark"
-/>
+## What is LLM-Q?
 
-## Setting up
+Project LLM-Q is an upcoming set of services for managing and controlling your LLM features born out of our experiences building LLM applications.
 
-The first step to world-class documentation is setting up your editing environnments.
+The fundamentals of building LLM applications are different to those of the past, and new tools are needed to:
+
+- **Monitor** - Monitor and alert on the cost, latency, and quality of your application features in the high-variance world of LLM features.
+- **Continuous deployment and evaluation** - Safely rollout new model / prompt versions and evaluate their performance from production usage and user feedback.
+- **Train** - Collect and refine relevant prediction data from production for fine-tuning and training.
+- **Execute** - Run async jobs such as model backtesting, batch processing of user data, and more with a token-aware scheduling system.
+
+## Why choose LLM-Q?
+
+- **Built for production** - Our highest priority is to ensure we provide you the tools to safely monitor and deploy LLM features, while minimizing any potential impact we could have on your service. By default our monitoring tools do not sit between you and your LLM API. We also design our services to have safe defaults and fallbacks, so that even in the case of an outsage on our side, your system would continue to work while we fix it.
+
+- **Designed for privacy** - You have full control over what data is collected and stored by our services. We also provide straightforward mechanisms out of the box to comply with GDPR and other privacy regulations.
+
+- **LLM-first design** - Our design considerations are created with LLM applications in mind, and we account for the non-determinism and high variance in job sizes and latency that you experience when working with LLMs.
+
+- **Easy integration** - We provide flexible integration options depending on the level of detail you require. Start with a simple drop in replacement for your LLM SDK, and have the option to use our prompt management system, or add custom tracing for more complex parts of your application.
+
+### Services
+
+We'll be working on two services, starting out with Monitor and following up with Run.
 
 <CardGroup cols={2}>
-  <Card
-    title="Edit Your Docs"
-    icon="pen-to-square"
-    href="https://mintlify.com/docs/quickstart"
-  >
-    Get your docs set up locally for easy development
+  <Card title="Monitor" icon="pen-to-square">
+    See, manage, control the costs and deployment of your LLM apps features.
   </Card>
-  <Card
-    title="Preview Changes"
-    icon="image"
-    href="https://mintlify.com/docs/development"
-  >
-    Preview your changes before you push to make sure they're perfect
+  <Card title="Run" icon="image">
+    Execute your batch jobs with our LLM-first scheduler, designed for optimal
+    throughput and cost savings.
   </Card>
 </CardGroup>
 
-## Make it yours
+### Why LLM-Q Monitor?
 
-Update your docs to your brand and add valuable content for the best user conversion.
+Features:
 
-<CardGroup cols={2}>
-  <Card
-    title="Customize Style"
-    icon="palette"
-    href="https://mintlify.com/docs/settings/global"
-  >
-    Customize your docs to your company's colors and brands
-  </Card>
-  <Card
-    title="Reference APIs"
-    icon="code"
-    href="https://mintlify.com/docs/api-playground/openapi"
-  >
-    Automatically generate endpoints from an OpenAPI spec
-  </Card>
-  <Card
-    title="Add Components"
-    icon="screwdriver-wrench"
-    href="https://mintlify.com/docs/components/accordion"
-  >
-    Build interactive features and designs to guide your users
-  </Card>
-  <Card
-    title="Get Inspiration"
-    icon="stars"
-    href="https://mintlify.com/showcase"
-  >
-    Check out our showcase of our favorite documentation
-  </Card>
-</CardGroup>
+-
